@@ -9,25 +9,39 @@ const Hero = () => {
     const textRef = useRef(null);
 
     useEffect(() => {
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
         tl.fromTo('.hero-text',
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 1, stagger: 0.2 }
+            { opacity: 0, y: 50, filter: 'blur(10px)' },
+            { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, stagger: 0.15 }
         );
 
         tl.fromTo('.hero-cta',
-            { opacity: 0, scale: 0.8 },
-            { opacity: 1, scale: 1, duration: 0.5 },
-            "-=0.5"
+            { opacity: 0, scale: 0.9, y: 20 },
+            { opacity: 1, scale: 1, y: 0, duration: 0.8 },
+            "-=0.6"
         );
+
+        // Floating animation for background blobs
+        gsap.to('.hero-blob', {
+            y: 'random(-20, 20)',
+            x: 'random(-20, 20)',
+            duration: 'random(3, 5)',
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            stagger: {
+                each: 0.5,
+                from: 'random'
+            }
+        });
     }, []);
 
     return (
         <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
             {/* Background Decorative Elements */}
-            <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/20 rounded-full blur-[120px] animate-pulse"></div>
-            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-secondary/20 rounded-full blur-[120px] animate-pulse delay-700"></div>
+            <div className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/20 rounded-full blur-[120px] animate-pulse hero-blob"></div>
+            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-secondary/20 rounded-full blur-[120px] animate-pulse delay-700 hero-blob"></div>
 
             <div id="about" className="container mx-auto px-6 text-center z-10" ref={heroRef}>
                 <div className="inline-block px-4 py-1.5 mb-6 rounded-full glass border border-primary/20 text-primary text-sm font-semibold hero-text">

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { skills } from '../data';
 import {
     FaBrain,
@@ -9,7 +11,26 @@ import {
     FaTerminal
 } from 'react-icons/fa';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Skills = () => {
+    useEffect(() => {
+        gsap.fromTo('.skill-card',
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: '#skills',
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+    }, []);
+
     const skillCategories = [
         {
             title: 'Programming',
@@ -59,7 +80,7 @@ const Skills = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {skillCategories.map((cat, i) => (
-                        <div key={i} className="p-6 glass rounded-2xl border border-white/5 hover:border-primary/50 transition-all group">
+                        <div key={i} className="skill-card p-6 glass rounded-2xl border border-white/5 hover:border-primary/50 transition-all group">
                             <div className="flex items-center space-x-4 mb-6">
                                 <div className={`p-3 rounded-xl bg-gray-100 dark:bg-slate-800 ${cat.color} transition-transform group-hover:scale-110`}>
                                     {cat.icon}

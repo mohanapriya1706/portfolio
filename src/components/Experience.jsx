@@ -64,14 +64,20 @@ const Experience = () => {
 
         items.forEach((item, i) => {
             gsap.fromTo(item,
-                { opacity: 0, x: index => index % 2 === 0 ? 50 : -50 },
+                {
+                    opacity: 0,
+                    x: i % 2 === 0 ? 100 : -100,
+                    scale: 0.8
+                },
                 {
                     opacity: 1,
                     x: 0,
+                    scale: 1,
                     duration: 1,
+                    ease: "back.out(1.7)",
                     scrollTrigger: {
                         trigger: item,
-                        start: "top 85%",
+                        start: "top 90%",
                         toggleActions: "play none none reverse"
                     }
                 }

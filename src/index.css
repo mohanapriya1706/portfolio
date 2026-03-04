@@ -9,6 +9,10 @@
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   font-family: var(--font-sans);
   line-height: 1.5;
@@ -52,6 +56,12 @@ body {
 @layer components {
   .glass {
     @apply bg-slate-800/70 backdrop-blur-md border border-white/10 shadow-xl;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass:hover {
+    @apply border-primary/30 shadow-primary/10;
+    transform: translateY(-5px);
   }
 
   .text-gradient {
@@ -60,6 +70,11 @@ body {
 
   .section-padding {
     @apply py-20 px-6;
+  }
+
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
   }
 }
 
