@@ -62,4 +62,4 @@ The project is configured for **GitHub Pages** using GitHub Actions.
 This project is personal intellectual property. Feel free to use the structure as inspiration for your own portfolio.
 
 ---
-Built with ❤️ by Mohana.
+Built with ❤️ by Mohana with help of Antigravity.

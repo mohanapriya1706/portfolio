@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaComments, FaTimes, FaPaperPlane, FaEllipsisH } from 'react-icons/fa';
 import { useTheme } from '../context/ThemeContext';
 import { gsap } from 'gsap';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -109,7 +111,15 @@ const Chatbot = () => {
                                     ? 'bg-primary text-white rounded-br-none shadow-md'
                                     : 'bg-white/10 text-gray-200 rounded-bl-none border border-white/5 shadow-sm'
                                     }`}>
-                                    {msg.content}
+                                    {msg.role === 'assistant' ? (
+                                        <div className="prose prose-invert prose-sm max-w-none prose-p:leading-relaxed prose-pre:bg-slate-900 prose-pre:border prose-pre:border-white/10 prose-ul:list-disc prose-ol:list-decimal">
+                                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                                {msg.content}
+                                            </ReactMarkdown>
+                                        </div>
+                                    ) : (
+                                        msg.content
+                                    )}
                                 </div>
                             </div>
                         ))}
